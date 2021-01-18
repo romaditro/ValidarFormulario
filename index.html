@@ -15,10 +15,24 @@
 
     <!-- Mi style -->
     <link rel="stylesheet" href="assets/css/main.css">
-    <title>Titulo</title>
+    <title>Validar Formulario</title>
 </head>
 
 <body>
+    <h1>Formulario de registro</h1>
+    <form class="form-register" onsubmit="return validar();">
+        <div class="contenedor-inputs">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="inputcss">
+            <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" class="inputcss">
+            <input type="email" id="correo" name="correo" placeholder="Correo" class="inputcss">
+            <input type="text" id="usuario" name="usuario" placeholder="Usuario" class="inputcss">
+            <input type="password" id="pass" name="pass" placeholder="Contraseña" class="inputcss">
+            <input type="text" id="telefono" name="telefono" placeholder="Teléfono (911111111)" class="inputcss">
+            <input type="submit" value="Registrar" class="btn-enviar">
+
+        </div>
+    </form>
+
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
