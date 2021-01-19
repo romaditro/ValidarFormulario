@@ -20,7 +20,7 @@
 
 <body>
     <h1>Formulario de registro</h1>
-    <form class="form-register" onsubmit="return validar();">
+    <form class="form-register">
         <div class="contenedor-inputs">
             <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="inputcss">
             <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" class="inputcss">
@@ -28,12 +28,12 @@
             <input type="text" id="usuario" name="usuario" placeholder="Usuario" class="inputcss">
             <input type="password" id="pass" name="pass" placeholder="Contraseña" class="inputcss">
             <input type="text" id="telefono" name="telefono" placeholder="Teléfono (911111111)" class="inputcss">
-            <input type="submit" value="Registrar" class="btn-enviar">
-
+            <input type="button" id="btn_registrar" value="Registrar" class="btn-enviar">
+            <span id="msjValidacion"></span>
         </div>
     </form>
 
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="assets/js/script.js?ID=1"></script>
 </body>
 
 </html>

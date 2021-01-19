@@ -9917,6 +9917,10 @@ h1 {
   color: white;
 }
 
+.alert-warning {
+  color: red;
+}
+
 body {
   font-family: sans-serif;
   background-color: #6e9e41;
