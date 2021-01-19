@@ -14,7 +14,7 @@ botonRegistrar.addEventListener("click", function() {
     let nombre, apellidos, correo, usuario, clave, telefono;
     let respuesta = false;
     let msjValidacion = document.getElementById("msjValidacion");
-
+    let patronEmail = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/";
 
     msjValidacion.innerHTML = "";
 
@@ -32,61 +32,88 @@ botonRegistrar.addEventListener("click", function() {
 
     //1- Validar que los campos no esten vacios
     if (nombre.value.trim().length == 0) {
-
-        //msjValidacion.innerHTML("dddddd");
-        //msjValidacion.addClass("alert-warning");
-        // msjValidacion.append("");
         msjValidacion.innerHTML = "El campo nombre es obligatorio.";
         nombre.focus();
         //return false;
     }
 
+    console.log("Nombre: " + nombre.value.trim().length);
+    if (nombre.value.trim().length > 30) {
+        msjValidacion.innerHTML = "El campo nombre debe superar los 30 caracteres.";
+        nombre.focus();
+        return false;
+    }
 
     if (apellidos.value.trim().length == 0) {
-
-        //msjValidacion.innerHTML("dddddd");
-        //msjValidacion.addClass("alert-warning");
-        // msjValidacion.append("");
         msjValidacion.innerHTML = "El campo apellidos es obligatorio.";
         return false;
     }
 
-    if (correo.value.trim().length == 0) {
+    if (apellidos.value.trim().length > 80) {
+        msjValidacion.innerHTML = "El campo nombre debe superar los 80 caracteres.";
+        nombre.focus();
+        return false;
+    }
 
-        //msjValidacion.innerHTML("dddddd");
-        //msjValidacion.addClass("alert-warning");
-        // msjValidacion.append("");
+    if (correo.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo correo es obligatorio.";
         return false;
     }
 
-    if (usuario.value.trim().length == 0) {
+    if (correo.value.trim().length > 100) {
+        msjValidacion.innerHTML = "El campo correo debe superar los 80 caracteres.";
+        nombre.focus();
+        return false;
+    }
 
-        //msjValidacion.innerHTML("dddddd");
-        //msjValidacion.addClass("alert-warning");
-        // msjValidacion.append("");
+    console.log("Valida correo : " + isValidEmail("prueba"));
+    if (!isValidEmail("prueba")) {
+        msjValidacion.innerHTML = "El campo correo no posee el formato correcto.";
+        nombre.focus();
+        return false;
+    }
+
+    if (usuario.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo usuario es obligatorio.";
         return false;
     }
 
-    if (clave.value.trim().length == 0) {
+    if (usuario.value.trim().length > 20) {
+        msjValidacion.innerHTML = "El campo nombre debe superar los 20 caracteres.";
+        nombre.focus();
+        return false;
+    }
 
-        //msjValidacion.innerHTML("dddddd");
-        //msjValidacion.addClass("alert-warning");
-        // msjValidacion.append("");
+
+    if (clave.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo contraseña es obligatorio.";
         clave.focus();
         return false;
     }
 
     if (telefono.value.trim().length == 0) {
-
-        //msjValidacion.innerHTML("dddddd");
-        //msjValidacion.addClass("alert-warning");
-        // msjValidacion.append("");
         msjValidacion.innerHTML = "El campo telefono es obligatorio.";
+        return false;
+    }
+
+    if (telefono.value.trim().length > 15) {
+        msjValidacion.innerHTML = "El campo nombre debe superar los 15 caracteres.";
+        nombre.focus();
+        return false;
+    }
+
+
+    if (isNaN(telefono.value)) {
+        msjValidacion.innerHTML = "El campo telefono debe ser numerico.";
+        nombre.focus();
         return false;
     }
 
     //return respuesta;
 });
+
+
+
+function isValidEmail(mail) {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
+}
