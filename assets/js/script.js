@@ -12,8 +12,9 @@ let botonRegistrar = document.getElementById("btn_registrar");
 
 botonRegistrar.addEventListener("click", function() {
     let nombre, apellidos, correo, usuario, clave, telefono;
-    let respuesta = false;
+    let respuesta = true;
     let msjValidacion = document.getElementById("msjValidacion");
+    let mensaje = document.getElementById("mensaje");
     let patronEmail = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/";
 
     msjValidacion.innerHTML = "";
@@ -109,11 +110,18 @@ botonRegistrar.addEventListener("click", function() {
         return false;
     }
 
-    //return respuesta;
+    if (respuesta) {
+        //let bienvenida = ("Bienvenidx {0} {1}. Tu usuario es  {2} y tu contraseña es {3}", , apellidos.value.trim(), usuario.value.trim(), clave.value.trim());
+        let bienvenida = format("Bienvenidx {0}", apellidos.value.trim());
+        mensaje.innerHTML = bienvenida;
+    }
+
+    return respuesta;
 });
 
 
 
 function isValidEmail(mail) {
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
+    // return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
+    return true;
 }
