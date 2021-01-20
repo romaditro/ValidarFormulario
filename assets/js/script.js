@@ -1,25 +1,15 @@
-let persona = {
-    nombre: '',
-    apellidos: '',
-    correo: '',
-    usuario: '',
-    pass: '',
-    telefono: ''
-}
-
 let botonRegistrar = document.getElementById("btn_registrar");
-
+document.getElementById("nombre").focus();
 
 botonRegistrar.addEventListener("click", function() {
     let nombre, apellidos, correo, usuario, clave, telefono;
     let respuesta = true;
     let msjValidacion = document.getElementById("msjValidacion");
-    let mensaje = document.getElementById("mensaje");
     let patronEmail = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/";
 
     msjValidacion.innerHTML = "";
 
-    //Campos del formulario.
+    //Obtener los campos del formulario.
     nombre = document.getElementById("nombre");
     apellidos = document.getElementById("apellidos");
     correo = document.getElementById("correo");
@@ -28,100 +18,95 @@ botonRegistrar.addEventListener("click", function() {
     telefono = document.getElementById("telefono");
 
 
-    console.log("nombre : " + nombre.value.trim().length);
-    console.log("Respuesta : " + respuesta);
-
-    //1- Validar que los campos no esten vacios
+    //Nombre.
     if (nombre.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo nombre es obligatorio.";
         nombre.focus();
-        //return false;
-    }
-
-    console.log("Nombre: " + nombre.value.trim().length);
-    if (nombre.value.trim().length > 30) {
-        msjValidacion.innerHTML = "El campo nombre debe superar los 30 caracteres.";
+        return false;
+    } else if (nombre.value.trim().length > 30) {
+        msjValidacion.innerHTML = "El campo nombre no debe superar los 30 caracteres.";
         nombre.focus();
         return false;
     }
 
+    //Apellidos.
     if (apellidos.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo apellidos es obligatorio.";
+        apellidos.focus();
+        return false;
+    } else if (apellidos.value.trim().length > 80) {
+        msjValidacion.innerHTML = "El campo apellidos no debe superar los 80 caracteres.";
+        apellidos.focus();
         return false;
     }
 
-    if (apellidos.value.trim().length > 80) {
-        msjValidacion.innerHTML = "El campo nombre debe superar los 80 caracteres.";
-        nombre.focus();
-        return false;
-    }
 
+    //Correo.
     if (correo.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo correo es obligatorio.";
+        correo.focus();
+        return false;
+    } else if (correo.value.trim().length > 100) {
+        msjValidacion.innerHTML = "El campo correo no debe superar los 80 caracteres.";
+        correo.focus();
+        return false;
+    } else if (!isValidEmail(correo.value.trim())) {
+        msjValidacion.innerHTML = "El campo correo no posee el formato correcto. <br> Ej: mi.email[@]desafio-latam[.]cl";
+        correo.focus();
         return false;
     }
 
-    if (correo.value.trim().length > 100) {
-        msjValidacion.innerHTML = "El campo correo debe superar los 80 caracteres.";
-        nombre.focus();
-        return false;
-    }
-
-    console.log("Valida correo : " + isValidEmail("prueba"));
-    if (!isValidEmail("prueba")) {
-        msjValidacion.innerHTML = "El campo correo no posee el formato correcto.";
-        nombre.focus();
-        return false;
-    }
-
+    //Usuario.
     if (usuario.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo usuario es obligatorio.";
+        usuario.focus();
+        return false;
+    } else if (usuario.value.trim().length > 20) {
+        msjValidacion.innerHTML = "El campo usuario no debe superar los 20 caracteres.";
+        usuario.focus();
         return false;
     }
 
-    if (usuario.value.trim().length > 20) {
-        msjValidacion.innerHTML = "El campo nombre debe superar los 20 caracteres.";
-        nombre.focus();
-        return false;
-    }
 
-
+    //Clave.
     if (clave.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo contraseña es obligatorio.";
         clave.focus();
         return false;
     }
 
+
+    //Telefono.
     if (telefono.value.trim().length == 0) {
         msjValidacion.innerHTML = "El campo telefono es obligatorio.";
+        telefono.focus();
         return false;
-    }
-
-    if (telefono.value.trim().length > 15) {
-        msjValidacion.innerHTML = "El campo nombre debe superar los 15 caracteres.";
-        nombre.focus();
+    } else if (telefono.value.trim().length > 15) {
+        msjValidacion.innerHTML = "El campo telefono no debe superar los 15 caracteres.";
+        telefono.focus();
         return false;
-    }
-
-
-    if (isNaN(telefono.value)) {
+    } else if (isNaN(telefono.value)) {
         msjValidacion.innerHTML = "El campo telefono debe ser numerico.";
-        nombre.focus();
+        telefono.focus();
         return false;
     }
 
+    //Si todo es correcto, mostrar mensaje de bienvenida.
     if (respuesta) {
-        //let bienvenida = ("Bienvenidx {0} {1}. Tu usuario es  {2} y tu contraseña es {3}", , apellidos.value.trim(), usuario.value.trim(), clave.value.trim());
-        let bienvenida = format("Bienvenidx {0}", apellidos.value.trim());
-        mensaje.innerHTML = bienvenida;
+        let bienvenida = "Bienvenido/a " + nombre.value.trim() + " " + apellidos.value.trim() + ".<br>" +
+            "Tú usuario y contrseña es  " + usuario.value.trim() + " " + clave.value.trim();
+
+        msjValidacion.innerHTML = bienvenida;
     }
 
     return respuesta;
 });
 
 
-
+/*
+ * Función para validar el correo.
+ */
 function isValidEmail(mail) {
-    // return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
-    return true;
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
+    //return true;
 }

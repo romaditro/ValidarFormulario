@@ -9919,6 +9919,7 @@ h1 {
 
 .alert-warning {
   color: red;
+  text-align: center;
 }
 
 body {
@@ -9941,6 +9942,7 @@ input {
   border-radius: 3px;
   outline: none;
   margin-bottom: 10px;
+  margin-left: 75px;
   width: 280px;
   height: 30px;
 }
